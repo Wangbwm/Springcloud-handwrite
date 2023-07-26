@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         }
         // 注册成功，开启心跳检测发送
         new Thread(() -> {
-            while (true) {
+            while (flag) {
                 try {
                     // 1分钟发送一次
                     Thread.sleep(1000 * 60);
