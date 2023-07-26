@@ -13,4 +13,6 @@ public interface UserService {
      * 心跳检测
      */
     void heartbeat(ServiceRegisterDTO serviceRegisterDTO);
+
+    void delete();
 }

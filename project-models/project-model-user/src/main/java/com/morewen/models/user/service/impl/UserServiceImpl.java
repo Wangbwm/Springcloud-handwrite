@@ -1,6 +1,7 @@
 package com.morewen.models.user.service.impl;
 
 import com.morewen.common.core.domain.DTO.ServiceRegisterDTO;
+import com.morewen.common.core.exception.ServiceException;
 import com.morewen.common.core.utils.AjaxResult;
 import com.morewen.models.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -82,5 +83,16 @@ public class UserServiceImpl implements UserService {
     public void heartbeat(ServiceRegisterDTO serviceRegisterDTO) {
         String url = "http://" + registerAddr + "/register/heartBeat";
         restTemplate.postForObject(url,serviceRegisterDTO, Object.class);
+    }
+
+    @Override
+    public void delete() {
+        String url = "http://" + registerAddr + "/register/delete";
+        AjaxResult ajaxResult = restTemplate.postForObject(url, serviceRegisterDTO, AjaxResult.class);
+        if (ajaxResult.isSuccess()) {
+            flag = false;
+        }else {
+            throw new ServiceException("注销失败");
+        }
     }
 }

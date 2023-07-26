@@ -66,6 +66,14 @@ public class ServiceRegisterController {
         return AjaxResult.success("心跳检测成功");
     }
 
+    @PostMapping("/delete")
+    @Log(title = "服务注销", businessType = BusinessType.DELETE)
+    protected AjaxResult delete(@RequestBody ServiceRegisterDTO serviceRegisterDTO) {
+        checkDTO(serviceRegisterDTO);
+        serviceRegisterService.delete(serviceRegisterDTO.getName(), serviceRegisterDTO.getUrl());
+        return AjaxResult.success("服务注销成功");
+    }
+
     private static void checkDTO(ServiceRegisterDTO serviceRegisterDTO) {
         if (Objects.isNull(serviceRegisterDTO)) {
             throw new ServiceException("服务注册信息不能为空");

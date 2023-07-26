@@ -17,4 +17,5 @@ public interface ServiceRegisterService {
     // 延长服务存活时间
     void delay(String serviceName, String url);
 
+    void delete(String name, String url);
 }

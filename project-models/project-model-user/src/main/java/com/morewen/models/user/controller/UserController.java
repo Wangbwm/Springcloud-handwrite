@@ -6,6 +6,7 @@ import com.morewen.common.core.utils.AjaxResult;
 import com.morewen.models.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,25 @@ public class UserController {
             return AjaxResult.error("注册失败");
         }
         flag = true;
+        return AjaxResult.success();
+    }
+
+    /**
+     * 服务注销
+     * @return 结果
+     */
+    @DeleteMapping("/delete")
+    protected AjaxResult delete() {
+        if (!flag) {
+            return AjaxResult.error("服务未注册");
+        }
+        try {
+            userService.delete();
+        } catch (Exception e) {
+            log.error("注销失败", e);
+            return AjaxResult.error("注销失败");
+        }
+        flag = false;
         return AjaxResult.success();
     }
 

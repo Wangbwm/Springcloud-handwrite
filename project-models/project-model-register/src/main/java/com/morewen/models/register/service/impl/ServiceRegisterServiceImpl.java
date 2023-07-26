@@ -102,4 +102,15 @@ public class ServiceRegisterServiceImpl implements ServiceRegisterService {
         // 更新最后一次心跳时间
         keepAliveMannager.updateLastKeepAliveTime();
     }
+
+    @Override
+    public void delete(String name, String url) {
+        // 根据服务名获取服务注册表
+        Map<String, KeepAliveMannager> stringKeepAliveMannagerMap = serviceMap.get(name);
+        if (stringKeepAliveMannagerMap == null || stringKeepAliveMannagerMap.size() == 0) {
+            return;
+        }
+        // 根据url获取自定超时删除容器
+        stringKeepAliveMannagerMap.remove(url);
+    }
 }
