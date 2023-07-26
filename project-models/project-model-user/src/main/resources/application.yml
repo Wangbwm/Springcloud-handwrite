@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: user-service
+server:
+  port: 8081
+register:
+  discovery:
+    server-addr: localhost:8081
+    service-name: user-service
+    register-addr: localhost:8080

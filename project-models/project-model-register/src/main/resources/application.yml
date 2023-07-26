@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: Service-Register
+server:
+  port: 8080
