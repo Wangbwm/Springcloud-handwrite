@@ -6,9 +6,6 @@
         <artifactId>springBoot-fastStart</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modules>
-        <module>project-api-test</module>
-    </modules>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>project-api</artifactId>
