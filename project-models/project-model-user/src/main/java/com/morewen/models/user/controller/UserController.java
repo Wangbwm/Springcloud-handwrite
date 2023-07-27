@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /**
  * @author Wangbw
  */
@@ -22,37 +26,18 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
-    @GetMapping("/index")
-    @Log(title = "用户服务注册", businessType = BusinessType.OTHER)
-    public AjaxResult index() {
-        try {
-            userService.init();
-        } catch (Exception e) {
-            log.error("注册失败", e);
-            return AjaxResult.error("注册失败");
-        }
+    @PostConstruct
+    public void init() {
+        userService.init();
         flag = true;
-        return AjaxResult.success();
+        log.info("用户服务启动成功");
     }
 
-    /**
-     * 服务注销
-     * @return 结果
-     */
-    @DeleteMapping("/delete")
-    protected AjaxResult delete() {
-        if (!flag) {
-            return AjaxResult.error("服务未注册");
-        }
-        try {
-            userService.delete();
-        } catch (Exception e) {
-            log.error("注销失败", e);
-            return AjaxResult.error("注销失败");
-        }
+    @PreDestroy
+    public void cleanup() {
+        userService.delete();
         flag = false;
-        return AjaxResult.success();
+        log.info("用户服务关闭成功");
     }
 
     @GetMapping("/test")
@@ -60,6 +45,7 @@ public class UserController {
     public AjaxResult test() {
         if (!flag) {
             userService.init();
+            flag = true;
         }
         return AjaxResult.success("Hello World!");
     }

@@ -4,19 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.morewen</groupId>
-        <artifactId>springBoot-fastStart</artifactId>
+        <artifactId>project-models</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modules>
-        <module>project-model-register</module>
-        <module>project-model-user</module>
-        <module>project-model-gateway</module>
-    </modules>
-    <artifactId>project-models</artifactId>
+    <artifactId>project-model-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>project-models</name>
-    <description>project-models</description>
-    <packaging>pom</packaging>
+    <name>project-model-gateway</name>
+    <description>project-model-gateway</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,6 +26,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.morewen</groupId>
+            <artifactId>project-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>
